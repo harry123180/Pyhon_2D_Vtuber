@@ -2,8 +2,9 @@ import cv2
 import mediapipe as mp
 import time
 import numpy as np
+import f
 #env = VE
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(1)
 pTime = 0
 mpDraw = mp.solutions.drawing_utils
 mpFaceMesh = mp.solutions.face_mesh
@@ -43,6 +44,9 @@ while True:
                     cv2.circle(img, (x, y), 60, (0, 0, 0), 0)
                     p2 = (x*10,y*10)
                     cv2.line(img, p1, p2, (0, 0, 255), 5)
+        #print(p1,p2)
+        print(f.d(p1,p2))
+
 
 
 

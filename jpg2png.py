@@ -10,7 +10,7 @@ def addTransparency(img, factor=0.7):
     img = Image.blend(img_blender, img, factor)
     return img
 
-
-img = Image.open("background.jpg")
+a = "face.png"
+img = Image.open(a)
 img = addTransparency(img, factor=1)
-img.save(r'background.png')
+img.save(a)

@@ -5,7 +5,7 @@ import math
 import numpy as np
 import f
 #env = VE
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(1)
 pTime = 0
 img2_path = "w.png"
 bg_path = "background.png"
@@ -22,9 +22,10 @@ def rotate(image, angle, center, scale = 1.0):
     M = cv2.getRotationMatrix2D((y/2,x/2), angle, scale)
     rotated = cv2.warpAffine(image, M, (y,x))
     return rotated
+K=1
 while True:
     success, img = cap.read()
-    img = cv2.resize(img,(int(bg_y/10), int(bg_x/10)), interpolation=cv2.INTER_AREA)
+    img = cv2.resize(img,(int(bg_y/K), int(bg_x/K)), interpolation=cv2.INTER_AREA)
     imgRGB = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     b_channel, g_channel, r_channel = cv2.split(img)
 
@@ -46,10 +47,10 @@ while True:
                 x,y = int(lm.x*iw), int(lm.y*ih)
                 if(id ==2):
                     cv2.circle(final, (x, y), 60, (0,0,0), 0)
-                    p1 = (x*10,y*10)
+                    p1 = (x*K,y*K)
                 elif(id==10):
                     cv2.circle(final, (x, y), 60, (0, 0, 0), 0)
-                    p2 = (x*10,y*10)
+                    p2 = (x*K,y*K)
                     cv2.line(final, p1, p2, (0, 0, 255), 5)
                     if(p2[0]-p1[0]!=0):
                         deg = math.degrees(math.atan((p1[1]-p2[1])/(p2[0]-p1[0])))
@@ -57,7 +58,8 @@ while True:
                             deg = 180+deg
                 #print(id,x,y)
         apply_logo = rotate(logo.copy(), deg, None, 1)
-        final = f.putOBJ(final,apply_logo,p1[0],p1[1])
+        logo_obj = f.object(apply_logo)
+        final = f.putOBJ(final,logo_obj,p1[0],p1[1])
 
 
     cTime = time.time()
