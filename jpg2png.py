@@ -10,7 +10,10 @@ def addTransparency(img, factor=0.7):
     img = Image.blend(img_blender, img, factor)
     return img
 
-a = "close_mouth.png"
+open_mouth_path = "fig_2//open_mouth.png"
+close_mouth_path="fig_2//close_mouth.png"
+open_eyes_path="fig_2//open_eyes.png"
+close_eyes_path="fig_2//close_eyes.png"
 img = Image.open(a)
 img = addTransparency(img, factor=1)
 img.save(a)

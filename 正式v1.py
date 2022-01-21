@@ -1,7 +1,6 @@
 import cv2
 import mediapipe as mp
 import time
-import math
 import numpy as np
 import f
 import 排版 as pp
@@ -33,15 +32,16 @@ while True:
         for faceLms in results.multi_face_landmarks:
             ih, iw, ic = img_BGRA.shape
     #face_state,left_eye, right_eye, mouth_state
-        state = [1,f.return_left_eyes(ih, iw, faceLms.landmark),f.return_right_eyes(ih, iw, faceLms.landmark),f.return_mouth_state(ih, iw, faceLms.landmark)]
-    final = pp.process(int(faceLms.landmark[21].x * 2147),int( faceLms.landmark[21].y * 2976), state)
+            state = [1,f.return_left_eyes(ih, iw, faceLms.landmark),f.return_right_eyes(ih, iw, faceLms.landmark),f.return_mouth_state(ih, iw, faceLms.landmark)]
+    #print(int(faceLms.landmark[21].x * 2147)-500,int( faceLms.landmark[21].y * 2976)-500)
+        final = pp.process(0,0, state)
     cTime = time.time()
     fps = 1 / (cTime - pTime)
     pTime = cTime
     cv2.putText(final, f'FPS: {int(fps)}', (20, 70), cv2.FONT_HERSHEY_PLAIN,
                 3, (255, 0, 0), 3)
     cv2.namedWindow("Image", 0)
-    cv2.resizeWindow("Image", 700, 600)
+    cv2.resizeWindow("Image", 1000, 800)
     cv2.namedWindow("Image2", 0)
     cv2.resizeWindow("Image2", 700, 600)
     cv2.imshow("Image", final)

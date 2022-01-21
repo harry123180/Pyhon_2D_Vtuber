@@ -22,11 +22,18 @@ class background:
     def __init__(self,back):
         self.back = back
 def putOBJ(background,logo_obj,tar_x,tar_y):
-    #print(background.shape,logo_obj.indx_len)
+    cnt = 0
+    q,w,e = background.shape
     for i in range(logo_obj.indx_len):
-            #print([i+tar_y-logo_obj.half_y],[j+tar_x-logo_obj.half_x])
+        cnt+=1
+        bg_x = logo_obj.px_array[0][i]+tar_y-logo_obj.y_len#最後實際在背景上的x
+        bg_y = logo_obj.px_array[1][i]+tar_x-logo_obj.x_len#最後實際在背景上的y
+        if((bg_x>q and bg_x <0) or (bg_y>w and bg_y <0)):
+            pass
+        else:
             background[logo_obj.px_array[0][i]+tar_y-logo_obj.y_len][logo_obj.px_array[1][i]+tar_x-logo_obj.x_len] =\
                 logo_obj.image[logo_obj.px_array[0][i]][logo_obj.px_array[1][i]]
+    #print(cnt,bg_x,bg_y,"             ",(bg_x>q and bg_x <0),"   ",(bg_y>w and bg_y <0),"       ",(bg_x>q and bg_x <0) or (bg_y>w and bg_y <0))
     return background
 def d(p1,p2):
     a= pow(p2[0]-p1[0],2)
