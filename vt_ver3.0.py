@@ -3,8 +3,10 @@ import mediapipe as mp
 import time
 import numpy as np
 import f
-import 排版 as pp
+import layout as pp
+import os
 #env = VE
+print("GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG")
 cap = cv2.VideoCapture(0)
 pTime = 0
 mpDraw = mp.solutions.drawing_utils
@@ -34,16 +36,22 @@ while True:
     #face_state,left_eye, right_eye, mouth_state
             state = [1,f.return_left_eyes(ih, iw, faceLms.landmark),f.return_right_eyes(ih, iw, faceLms.landmark),f.return_mouth_state(ih, iw, faceLms.landmark)]
     #print(int(faceLms.landmark[21].x * 2147)-500,int( faceLms.landmark[21].y * 2976)-500)
-        final = pp.process(0,0, state)
+    final = pp.process(0,0, state)
     cTime = time.time()
     fps = 1 / (cTime - pTime)
     pTime = cTime
-    cv2.putText(final, f'FPS: {int(fps)}', (20, 70), cv2.FONT_HERSHEY_PLAIN,
-                3, (255, 0, 0), 3)
+    #cv2.putText(final, f'FPS: {int(fps)}', (20, 70), cv2.FONT_HERSHEY_PLAIN,
+                #3, (255, 0, 0), 3)
     cv2.namedWindow("Image", 0)
     cv2.resizeWindow("Image", 1000, 800)
-    cv2.namedWindow("Image2", 0)
-    cv2.resizeWindow("Image2", 700, 600)
+    cv2.namedWindow("webcam", 0)
+    cv2.resizeWindow("webcam", 700, 600)
     cv2.imshow("Image", final)
-    cv2.imshow("Image2",img_BGRA)
-    cv2.waitKey(1)
+    cv2.imshow("webcam",img_BGRA)
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+cap.release()
+
+# 關閉所有 OpenCV 視窗
+cv2.destroyAllWindows()
+os.system("pause")
