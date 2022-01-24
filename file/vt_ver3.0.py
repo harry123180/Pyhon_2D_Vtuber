@@ -11,7 +11,7 @@ mpDraw = mp.solutions.drawing_utils
 mpFaceMesh = mp.solutions.face_mesh
 faceMesh = mpFaceMesh.FaceMesh(max_num_faces=2)
 drawSpec = mpDraw.DrawingSpec(thickness=1, circle_radius=2)
-
+print("按Q結束程式")
 while True:
     success, img = cap.read()
     imgRGB = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)

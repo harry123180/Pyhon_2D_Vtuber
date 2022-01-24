@@ -1,18 +1,19 @@
 import cv2
 import f
 read_3h = cv2.IMREAD_COLOR
-bg_path = "background.png"
+bg_path ="background.png"
 background = cv2.imread(bg_path, read_3h)
 ##
-open_mouth_path = "G://kinematic//fig_2//open_mouth.png"
-close_mouth_path="G://kinematic//fig_2//close_mouth.png"
-open_eyes_path="G://kinematic//fig_2//open_eyes.png"
-close_eyes_path="G://kinematic//fig_2//close_eyes.png"
+open_mouth_path = "open_mouth.png"
+close_mouth_path="close_mouth.png"
+open_eyes_path="open_eyes.png"
+close_eyes_path="close_eyes.png"
 open_mouth = cv2.imread(open_mouth_path,read_3h)
 close_mouth=cv2.imread(close_mouth_path, read_3h)
 open_eyes = cv2.imread(open_eyes_path, read_3h)
 close_eyes=cv2.imread(close_eyes_path,read_3h)
 obj_list = [open_mouth,close_mouth,open_eyes,close_eyes]
+
 obj_cood =[]
 for i in range(len(obj_list)):
     obj_cood.append(obj_list[i].shape)
