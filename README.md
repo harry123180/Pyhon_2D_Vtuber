@@ -1,4 +1,4 @@
-# **kinematic**
+# **Pyhon_2D_Vtuber**
 以下是執行效果
 ![](fig/Demo.gif)
 ##請確保你擁有webcam在你電腦上
